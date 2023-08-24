@@ -25,3 +25,62 @@ var data = apiGet("/users/list", null, function(data) {
     console.error(err);
 });
 */
+
+function apiPost(endpoint, payload, onSuccess, onError) {
+    fetch(baseUrl + endpoint, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    })
+    .then(res => res.json())
+    .then(data => typeof onSuccess == "function" && onSuccess(data))
+    .catch(err => {
+        console.error(err);
+        typeof onError == "function" && onError(err);
+    });
+}
+
+function getPayload(payload) {
+    return "?" + new URLSearchParams(payload).toString();
+}
+
+
+function apiPut(endpoint, payload, onSuccess, onError) {
+    fetch(baseUrl + endpoint, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    })
+    .then(res => res.json())
+    .then(data => typeof onSuccess == "function" && onSuccess(data))
+    .catch(err => {
+        console.error(err);
+        typeof onError == "function" && onError(err);
+    });
+}
+
+function getPayload(payload) {
+    return "?" + new URLSearchParams(payload).toString();
+}
+
+function apiDelete(endpoint, payload, onSuccess, onError) {
+    var payloadString = getPayload(payload);
+    fetch(baseUrl + endpoint + payloadString, {
+        method: 'DELETE'
+    })
+    .then(res => res.json())
+    .then(data => typeof onSuccess == "function" && onSuccess(data))
+    .catch(err => {
+        console.error(err);
+        typeof onError == "function" && onError(err);
+    });
+}
+
+function getPayload(payload) {
+    return "?" + new URLSearchParams(payload).toString();
+}
+
