@@ -61,9 +61,6 @@ function apiPut(endpoint, data, onSuccess, onError) {
     });
 }
 
-function getPayload(payload) {
-    return "?" + new URLSearchParams(payload).toString();
-}
 
 function apiDelete(endpoint, payload, onSuccess, onError) {
     var payloadString = getPayload(payload);
